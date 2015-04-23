@@ -5,7 +5,7 @@ SELECT c.firstName,c.lastName FROM Constituents AS c JOIN Revenue as r ON c.id=r
 SELECT SUM(r.amount) FROM Revenue AS r JOIN Deposits AS d ON d.revenue_id=r.id JOIN Company_Account AS ca ON d.account_number=ca.account_number WHERE d.account_number=15555555 AND ca.designation="events";
 
 /* Query to find the addresses for all Winter Lecture Series events in a case insensitive format */
-SELECT address FROM Event WHERE name COLLATE UTF8_GENERAL_CI LIKE "%winter lecture series%";
+SELECT address FROM Event WHERE name LIKE "%winter lecture series%" COLLATE UTF8_GENERAL_CI;
 
 /* Query to find all payments between the current datetime and May 1st, 2004 */
 SELECT * FROM Pays WHERE dateSent < now() AND dateSent > '2004-04-31 23:59:59';

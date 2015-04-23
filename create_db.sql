@@ -83,3 +83,6 @@ foreign key (event_name) references Event(Name)
 foreign key (revenue_id) references Revenue(id)
 	ON DELETE CASCADE
 );
+
+ALTER DATABASE schs charset=utf8;
+SET NAMES 'utf8';
