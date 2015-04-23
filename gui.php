@@ -29,7 +29,7 @@
 	        	$statement = strtolower($statement);
 	        	$split = explode(" ",$statement);
 	        	$first = trim($split[0]);
-	        	if($first == "drop" || $first == "insert" || $first == "update")
+	        	if($first == "drop" || $first == "insert" || $first == "update" || $first == "delete")
 	        		$retval = false;
 	        	return $retval;
 	        }
