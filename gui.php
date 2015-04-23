@@ -36,16 +36,27 @@
 	        if(!empty($_POST["sql"])){
 				$sql = trim($_POST["sql"]);
 	        	if(injection_defense($sql)){
-					$result = $conn->query($sql);
-
+					$result = mysqli_query($conn,$sql);
+					$cols = array();
+					while($property = mysqli_fetch_field($result)){
+						//echo $property->name;
+						array_push($cols, $property->name);
+					}
+					while($row = $result->fetch_assoc()) {
+						for($i=0; $i<count($cols); $i++)
+							echo $cols[$i] . ": " . $row[$cols[$i]] . "<br>";
+						echo "<br>";
+					}
+					mysqli_free_result($result);
+					/*
 					if ($result->num_rows > 0) {
 				    // output data of each row
-					    while($row = $result->fetch_assoc()) {
-					        echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
-					    }
+					    //while($row = $result->fetch_assoc()) {
+					    //    echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
+					    //}
 					} else {
 					    echo "No results for query";
-					}
+					}*/
 				}
 				else{
 					echo "SQL Injection attempt detected";
