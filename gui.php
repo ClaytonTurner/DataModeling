@@ -19,17 +19,26 @@
     <body>
         <h1>Charleston Historical Society Database Viewer</h1>
         <p>
+        	<form method="post">
+        	SQL Query: <input type="text" name="sql"><br>
+        	<input type="submit" value="Query">
+        	</form>
 	        <?php 
-			$sql = "SELECT * from Constituents";
-			$result = $conn->query($sql);
+	        if(!empty($_POST["sql"])){
+				$sql = $_POST["sql"];
+				$result = $conn->query($sql);
 
-			if ($result->num_rows > 0) {
-		    // output data of each row
-			    while($row = $result->fetch_assoc()) {
-			        echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
-			    }
-			} else {
-			    echo "No results for query";
+				if ($result->num_rows > 0) {
+			    // output data of each row
+				    while($row = $result->fetch_assoc()) {
+				        echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
+				    }
+				} else {
+				    echo "No results for query";
+				}
+			}
+			else{
+				echo "Post is empty";
 			}
 			$conn->close();
 	        ?>
