@@ -24,17 +24,31 @@
         	<input type="submit" value="Query">
         	</form>
 	        <?php 
+	        function injection_defense($statement){
+	        	$retval = true;
+	        	$statement = strtolower($statement);
+	        	$split = explode(" ",$statement);
+	        	$first = trim($split[0]);
+	        	if($first == "drop" || $first == "insert" || $first == "update")
+	        		$retval = false;
+	        	return $retval;
+	        }
 	        if(!empty($_POST["sql"])){
-				$sql = $_POST["sql"];
-				$result = $conn->query($sql);
+				$sql = trim($_POST["sql"]);
+	        	if(injection_defense($sql)){
+					$result = $conn->query($sql);
 
-				if ($result->num_rows > 0) {
-			    // output data of each row
-				    while($row = $result->fetch_assoc()) {
-				        echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
-				    }
-				} else {
-				    echo "No results for query";
+					if ($result->num_rows > 0) {
+				    // output data of each row
+					    while($row = $result->fetch_assoc()) {
+					        echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
+					    }
+					} else {
+					    echo "No results for query";
+					}
+				}
+				else{
+					echo "SQL Injection attempt detected";
 				}
 			}
 			else{
