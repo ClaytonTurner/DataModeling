@@ -39,7 +39,6 @@
 					$result = mysqli_query($conn,$sql);
 					$cols = array();
 					while($property = mysqli_fetch_field($result)){
-						//echo $property->name;
 						array_push($cols, $property->name);
 					}
 					while($row = $result->fetch_assoc()) {
@@ -48,15 +47,6 @@
 						echo "<br>";
 					}
 					mysqli_free_result($result);
-					/*
-					if ($result->num_rows > 0) {
-				    // output data of each row
-					    //while($row = $result->fetch_assoc()) {
-					    //    echo "Name: " . $row["firstName"]. " " . $row["lastName"]. "<br>","Address: ", $row["address"], ", ", $row["city"],", ",$row["state"],", ",$row["zip"],"<br>","Phone: ", $row["phone"], ", ",$row["email"],"<br><br>";
-					    //}
-					} else {
-					    echo "No results for query";
-					}*/
 				}
 				else{
 					echo "SQL Injection attempt detected";
