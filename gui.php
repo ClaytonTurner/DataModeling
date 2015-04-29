@@ -21,7 +21,8 @@
         <h1 id="title">Charleston Historical Society Database Viewer</h1>
         <h3 id="names">Clayton Turner and Parker Bednar</h3>
         <p id="form">
-        	<textarea id="sqlta" rows="8" cols="50" name="sql" form="sqlform" onclick="document.getElementById('sqlta').innerHTML='';">Enter SQL here</textarea>
+        	<textarea id="sqlta" rows="8" cols="50" name="sql" form="sqlform" 
+        		onclick="document.getElementById('sqlta').innerHTML='';">Enter SQL here</textarea>
         	<div id="form">
         		<form method="post" id="sqlform">
         			<input type="submit" value="Query">
