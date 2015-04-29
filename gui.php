@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>CHS Database</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <?php 
         $servername = "localhost";
         $username = "root";
@@ -17,12 +18,16 @@
 		?>
     </head>
     <body>
-        <h1>Charleston Historical Society Database Viewer</h1>
-        <p>
-        	<form method="post">
-        	SQL Query: <input type="text" name="sql"><br>
-        	<input type="submit" value="Query">
-        	</form>
+        <h1 id="title">Charleston Historical Society Database Viewer</h1>
+        <h3 id="names">Clayton Turner and Parker Bednar</h3>
+        <p id="form">
+        	<textarea id="sqlta" rows="8" cols="50" name="sql" form="sqlform">Enter SQL here</textarea>
+        	<div id="form">
+        		<form method="post" id="sqlform">
+        			<input type="submit" value="Query">
+        		</form>
+        	</div>
+        	
 	        <?php 
 	        function injection_defense($statement){
 	        	$retval = true;
